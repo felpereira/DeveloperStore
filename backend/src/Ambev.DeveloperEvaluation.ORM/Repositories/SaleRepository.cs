@@ -31,5 +31,15 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             _context.Sales.Update(sale);
             return Task.CompletedTask;
         }
+
+        public async Task<IEnumerable<Sale>> GetAllAsync()
+        {
+            // Returns the list of sales without tracking changes for performance.
+            // Orders by most recent date.
+            return await _context.Sales
+                                 .AsNoTracking()
+                                 .OrderByDescending(s => s.Date)
+                                 .ToListAsync();
+        }
     }
 }

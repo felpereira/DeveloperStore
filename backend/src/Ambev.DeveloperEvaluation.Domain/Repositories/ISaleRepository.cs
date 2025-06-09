@@ -27,6 +27,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Repositories
         /// </summary>
         /// <param name="sale">The sale to be updated.</param>
         /// <returns>A task that represents the asynchronous operation.</returns>
-        Task UpdateAsync(Sale sale);
+        Task UpdateAsync(Sale sale);               
+        Task<IEnumerable<Sale>> GetAllAsync();
     }
 }

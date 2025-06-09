@@ -1,10 +1,12 @@
 using Ambev.DeveloperEvaluation.Application.Sales.CancelSale;
 using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.Application.Sales.GetSaleById;
+using Ambev.DeveloperEvaluation.Application.Sales.GetSalesList;
 using Ambev.DeveloperEvaluation.Application.Sales.UpdateSale;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSalesList;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.UpdateSale;
 using AutoMapper;
 using MediatR;
@@ -98,7 +100,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales
 
             return NoContent(); // HTTP 204 is the standard response for a successful update.
         }
-        
+
         /// <summary>
         /// Cancels an existing sale.
         /// </summary>
@@ -113,6 +115,21 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales
             var command = new CancelSaleCommand { SaleId = id };
             await _mediator.Send(command);
             return NoContent();
+        }
+        
+                /// <summary>
+        /// Retrieves a list of all sales.
+        /// </summary>
+        /// <returns>A list of sales.</returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(ApiResponseWithData<IEnumerable<GetSalesListResponse>>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetSalesList()
+        {
+            var query = new GetSalesListQuery();
+            var result = await _mediator.Send(query);
+            
+            var response = _mapper.Map<IEnumerable<GetSalesListResponse>>(result);
+            return Ok(new ApiResponseWithData<IEnumerable<GetSalesListResponse>> { Data = response });
         }
     }
 }
