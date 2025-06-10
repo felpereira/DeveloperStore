@@ -29,5 +29,6 @@ public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
         RuleFor(user => user.Phone).Matches(@"^\+?[1-9]\d{1,14}$");
         RuleFor(user => user.Status).NotEqual(UserStatus.Unknown);
         RuleFor(user => user.Role).NotEqual(UserRole.None);
+        RuleFor(user => user.Role).IsInEnum();
     }
 }
