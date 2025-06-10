@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import { QueryProvider } from "@/components/QueryProvider";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner"; 
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +34,7 @@ export default function RootLayout({
          <QueryProvider>
           <Header />
           <main className="container mx-auto py-8">{children}</main>
+          <SonnerToaster richColors />
          </QueryProvider>
       </body>
     </html>
