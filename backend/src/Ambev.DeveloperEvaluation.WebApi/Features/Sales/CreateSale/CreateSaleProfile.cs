@@ -11,7 +11,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale
             // Maps the request DTO to the application command.
             CreateMap<CreateSaleRequest, CreateSaleCommand>();
             CreateMap<SaleItemRequest, SaleItemCommand>();
-            
+
             // Maps the application result to the response DTO.
             CreateMap<CreateSaleResult, CreateSaleResponse>();
         }

@@ -19,7 +19,9 @@ public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
     /// - Password: Must meet security requirements (using PasswordValidator)
     /// - Phone: Must match international format (+X XXXXXXXXXX)
     /// - Status: Cannot be Unknown
+    /// - Status: Is Enum
     /// - Role: Cannot be None
+    /// - Role: Is Enum
     /// </remarks>
     public CreateUserRequestValidator()
     {
@@ -28,6 +30,7 @@ public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
         RuleFor(user => user.Password).SetValidator(new PasswordValidator());
         RuleFor(user => user.Phone).Matches(@"^\+?[1-9]\d{1,14}$");
         RuleFor(user => user.Status).NotEqual(UserStatus.Unknown);
+        RuleFor(user => user.Status).IsInEnum();
         RuleFor(user => user.Role).NotEqual(UserRole.None);
         RuleFor(user => user.Role).IsInEnum();
     }

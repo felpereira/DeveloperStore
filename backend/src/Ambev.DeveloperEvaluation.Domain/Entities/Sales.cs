@@ -26,7 +26,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
             Status = SaleStatus.InProgress;
             _items = new List<SaleItem>();
             TotalAmount = 0;
-            
+
             // Add the domain event to be dispatched later.
             AddDomainEvent(new SaleCreatedEvent(this.Id));
         }
@@ -47,13 +47,13 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         {
             if (Status == SaleStatus.Cancelled)
                 throw new DomainException("It's not possible to add items to a cancelled sale.");
-            
+
             var existingItem = _items.FirstOrDefault(i => i.ProductId == productId);
             if (existingItem != null)
                 existingItem.UpdateQuantity(quantity);
             else
                 _items.Add(new SaleItem(Id, productId, productName, quantity, unitPrice, discount));
-            
+
             CalculateTotalAmount();
         }
 
@@ -72,15 +72,15 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         {
             if (Status == SaleStatus.Cancelled)
                 throw new DomainException("The sale has already been cancelled.");
-            
+
             Status = SaleStatus.Cancelled;
         }
 
         public void Complete()
         {
-             if (Status != SaleStatus.InProgress)
+            if (Status != SaleStatus.InProgress)
                 throw new DomainException("Only a sale in progress can be completed.");
-            
+
             Status = SaleStatus.Completed;
         }
     }

@@ -116,8 +116,8 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales
             await _mediator.Send(command);
             return NoContent();
         }
-        
-                /// <summary>
+
+        /// <summary>
         /// Retrieves a list of all sales.
         /// </summary>
         /// <returns>A list of sales.</returns>
@@ -127,7 +127,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales
         {
             var query = new GetSalesListQuery();
             var result = await _mediator.Send(query);
-            
+
             var response = _mapper.Map<IEnumerable<GetSalesListResponse>>(result);
             return Ok(new ApiResponseWithData<IEnumerable<GetSalesListResponse>> { Data = response });
         }

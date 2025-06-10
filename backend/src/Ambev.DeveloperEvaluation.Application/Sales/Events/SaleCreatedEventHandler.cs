@@ -17,7 +17,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.Events
         public Task Handle(SaleCreatedEvent notification, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Domain Event: SaleCreatedEvent published for SaleId: {SaleId}", notification.SaleId);
-            
+
             // Here you could, for example:
             // - Send a confirmation email
             // - Update an inventory service

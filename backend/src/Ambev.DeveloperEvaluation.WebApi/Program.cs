@@ -22,7 +22,7 @@ public class Program
             Log.Information("Starting web application");
 
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            
+
 
             builder.Services.AddCors(options =>
             {
@@ -41,7 +41,7 @@ public class Program
 
             builder.AddBasicHealthChecks();
             builder.Services.AddSwaggerGen();
-            
+
             builder.Services.AddDbContext<DefaultContext>(options =>
                 options.UseNpgsql(
                     builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -75,12 +75,12 @@ public class Program
             }
 
             app.UseHttpsRedirection();
-            
-           app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseBasicHealthChecks();
 
             app.MapControllers();

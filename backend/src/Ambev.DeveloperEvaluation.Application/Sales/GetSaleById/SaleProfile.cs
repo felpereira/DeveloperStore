@@ -11,7 +11,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales
         {
             CreateMap<Sale, GetSaleByIdQueryResult>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
-            
+
             CreateMap<SaleItem, SaleItemResult>();
         }
     }

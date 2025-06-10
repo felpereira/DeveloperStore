@@ -30,7 +30,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSale
             // A simple approach to update items: clear the existing list and add the new ones.
             // EF Core will track the changes (deletions and insertions).
             // sale.ClearItems();
-            
+
             foreach (var itemCommand in request.Items)
             {
                 sale.AddItem(
@@ -44,7 +44,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSale
 
             // The repository's update method marks the entity state as Modified.
             await _saleRepository.UpdateAsync(sale);
-            
+
             // Persist all tracked changes to the database.
             await _context.SaveChangesAsync(cancellationToken);
 
